@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+ <h1>{{ contact.name }} {{ contact.lastname }}</h1>
+ {% endblock %}
+
+
+{% block content %}
+<table>
+ <tr><th>Imię</th><th>Nazwisko</th><th>Opis</th><th>Adres</th></tr>
+ <tr>
+  <td>{{contact.name}}</td>
+  <td>{{contact.lastname}}</td>
+  <td>{{contact.description}}</td>
+  <td>{{contact.address.city}}<br>
+  {{contact.address.street}} {{contact.address.house_no}} m. {{ contact.address.flat_no }}</td>
+  <td><a href= "/modify/{{contact.id}}">edytuj</a></td>
+ </tr>
+</table>
+<style>
+th {
+    text-align: center;}
+</style>
+<style>
+td {
+    text-align: center;}
+</style>
+    <br>
+<a href="/">Wróć</a>
+{% endblock %}

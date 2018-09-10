@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block header %}
+ <h1>Edytuj kontakt</h1>
+{% endblock %}
+
+
+{% block content %}
+<form action="", method="POST">
+    {% csrf_token %}
+    <label> Zmień imię:
+        <input type="text"
+               name="name"
+               value = {{ contact.name }}>
+    </label><br>
+    <label> Zmień nazwisko:
+        <input type="text"
+               name="lastname"
+               value = {{ contact.lastname }}>
+    </label><br>
+    <label> Zmień opis:
+        <input type="text"
+               name="desc"
+               value = {{ contact.description }}>
+    </label><br>
+    <label>
+        <input type="submit" value="Edytuj">
+    </label>
+</form><br>
+
+<form action="/{{ contact.id}}/addAddress", method="POST">
+    {% csrf_token %}
+    <label> Dodaj nowy adres</label><br>
+        <input type="text" name="city" placeholder = 'miasto'><br>
+        <input type="text" name="street" placeholder = 'ulica'><br>
+        <input type="text" name="house_no" placeholder = "numer domu"><br>
+        <input type="text" name="flat_no" placeholder = 'numer mieszkania'>
+    </label><br>
+    <label>
+        <input type="submit" value="Dodaj">
+    </label>
+</form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+ <h2>Kontakty</h2>
+ {% endblock %}
+
+
+{% block content %}
+<table><tr><th>Imię</th><th>Nazwisko</th><th>Opis</th></tr>
+{% for i in contacts %}
+     <tr>
+      <td><a href= "/show/{{i.id}}">{{i.name}}</a></td>
+      <td>{{i.lastname}}</td>
+      <td>{{i.description}}</td>
+      <td><a href= "/modify/{{i.id}}">edytuj</a>
+      <a href= "/delete/{{i.id}}">usuń</a></td>
+     </tr>
+{% endfor %}
+<style>
+tr { text-align: left;}
+th { text-align: center;}
+</style>
+</table>
+<form action="/new">
+    <input type="submit" value="Dodaj">
+</form>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <style>
+            body {
+            }
+
+        </style>
+        <title>
+        {% block title %}
+        {% endblock %}
+        </title>
+    </head>
+    <body>
+        {% block header %}
+        {% endblock %}
+
+        <div>{{msg}}</div>
+
+        {% block content %}
+        {% endblock %}
+
+        {% block footer %}
+        {% endblock %}
+    </body>
+</html>
