@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+ <h2>Grupy</h2>
+ {% endblock %}
+
+
+{% block content %}
+<form action="", method="POST">
+    <label><strong>Wyszukaj:</strong>
+        <input type="text" name="search" placeholder="podaj imię lub nazwisko">
+    </label><br>
+    <label>
+        <input type="submit" value="Szukaj">
+    </label>
+    {% csrf_token %}
+</form><br>
+
+
+<table><tr><th>Nazwa grupy</th></tr>
+    {% for i in groups %}
+     <tr>
+      <td><a href= "/group/{{i.id}}">{{i.name}}</a></td>
+     </tr>
+{% endfor %}
+<style>
+tr { text-align: left;}
+th { text-align: center;}
+</style>
+</table><br>
+    <a href="/">Wróć</a>
+{% endblock %}

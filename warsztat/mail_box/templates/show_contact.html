@@ -2,22 +2,42 @@
 
 
 {% block header %}
- <h1>{{ contact.name }} {{ contact.lastname }}</h1>
+ <h2>{{ name }} {{ lastname }}</h2>
  {% endblock %}
 
 
 {% block content %}
 <table>
- <tr><th>Imię</th><th>Nazwisko</th><th>Opis</th><th>Adres</th></tr>
+ <tr><th>Imię</th><th>Nazwisko</th><th>Opis</th></tr>
  <tr>
-  <td>{{contact.name}}</td>
-  <td>{{contact.lastname}}</td>
-  <td>{{contact.description}}</td>
-  <td>{{contact.address.city}}<br>
-  {{contact.address.street}} {{contact.address.house_no}} m. {{ contact.address.flat_no }}</td>
-  <td><a href= "/modify/{{contact.id}}">edytuj</a></td>
+  <td>{{name}}</td>
+  <td>{{lastname}}</td>
+  <td>{{description}}</td>
  </tr>
+</table><br>
+
+<table>
+<tr><th>Adres</th></tr>
+<td>{{city}}<br>
+  {{street}} {{house_no}} m. {{flat_no }}</td>
+</table><br>
+
+<table>
+<tr><th>Numer</th><th>Rodzaj</th></tr>
+  {% for i in contacts %}
+      <tr><td>{{i.no}}</td>
+          <td>{{i.get_no_type_display}}</td></tr>
+  {% endfor %}
+</table><br>
+
+    <table>
+<tr><th>Email</th><th>Rodzaj</th></tr>
+  {% for i in emails %}
+      <tr><td>{{i.email}}</td>
+          <td>{{i.get_email_type_display}}</td></tr>
+  {% endfor %}
 </table>
+
 <style>
 th {
     text-align: center;}
@@ -27,5 +47,11 @@ td {
     text-align: center;}
 </style>
     <br>
-<a href="/">Wróć</a>
+<form action="/addParticipants/{{ id }}">
+    <label>
+        <input type="submit" value="Dodaj do grup">
+    </label>
+</form>
+<a href= "/modify/{{id}}">edytuj</a>
+    <a href="/">Wróć</a>
 {% endblock %}
