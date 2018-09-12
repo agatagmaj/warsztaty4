@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 
 {% block header %}
- <h2>Dodaj nowy kontakt</h2>
+    <h2>Dodaj nowy kontakt</h2>
 {% endblock %}
 
 
 {% block content %}
-<form action="", method="POST">
-    {% csrf_token %}
-    <label> Imię:
-        <input type="text"
-               name="name">
-    </label><br>
-    <label> Nazwisko:
-        <input type="text"
-               name="lastname">
-    </label><br>
-    <label> Opis
-        <input type="text"
-               name="desc">
-    </label><br>
-    <label>
-        <input type="submit" value="Dodaj">
-    </label>
-</form>
+    <form action="" , method="POST">
+        {% csrf_token %}
+        <label> Imię:
+            <input type="text"
+                   name="name">
+        </label><br>
+        <label> Nazwisko:
+            <input type="text"
+                   name="lastname">
+        </label><br>
+        <label> Opis
+            <input type="text"
+                   name="desc">
+        </label><br>
+        <label>
+            <input type="submit" value="Dodaj">
+
+        </label>
+    </form>
+
+    <a href="/">
+        <button type="button">Wróć
+    </a>
 {% endblock %}

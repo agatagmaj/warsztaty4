@@ -2,33 +2,43 @@
 
 
 {% block header %}
- <h2>Kontakty</h2>
- {% endblock %}
+    <h2>Kontakty</h2>
+{% endblock %}
 
 
 {% block content %}
-<table><tr><th>Imię</th><th>Nazwisko</th><th>Opis</th></tr>
-{% for i in contacts %}
-     <tr>
-      <td><a href= "/show/{{i.id}}">{{i.name}}</a></td>
-      <td>{{i.lastname}}</td>
-      <td>{{i.description}}</td>
-      <td><a href= "/modify/{{i.id}}">edytuj</a>
-      <a href= "/delete/{{i.id}}">usuń</a></td>
-     </tr>
-{% endfor %}
-<style>
-tr { text-align: left;}
-th { text-align: center;}
-</style>
-</table><br>
-<form action="/new">
-    <input type="submit" value="Dodaj kontakt">
-</form>
-<form action="/addGroup">
-    <input type="submit" value="Dodaj grupę">
-</form>
+    <table>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Opis</th>
+        </tr>
+        {% for i in contacts %}
+            <tr>
+                <td><a href="/show/{{ i.id }}">{{ i.name }}</a></td>
+                <td>{{ i.lastname }}</td>
+                <td>{{ i.description }}</td>
+                <td><a href="/modify/{{ i.id }}">edytuj</a>
+                    <a href="/delete/{{ i.id }}">usuń</a></td>
+            </tr>
+        {% endfor %}
+        <style>
+            tr {
+                text-align: left;
+            }
+
+            th {
+                text-align: center;
+            }
+        </style>
+    </table><br>
+    <form action="/new">
+        <input type="submit" value="Dodaj kontakt">
+    </form>
+    <form action="/addGroup">
+        <input type="submit" value="Dodaj grupę">
+    </form>
     <form action="/groups">
-    <input type="submit" value="Wyświetl listę grup">
-</form>
+        <input type="submit" value="Wyświetl listę grup">
+    </form>
 {% endblock %}

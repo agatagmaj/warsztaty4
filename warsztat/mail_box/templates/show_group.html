@@ -2,18 +2,24 @@
 
 
 {% block header %}
- <h2>{{ name }}</h2>
- {% endblock %}
+    <h2>{{ name }}</h2>
+{% endblock %}
 
 
 {% block content %}
-<table>
-<tr><th>Członkowie</th></tr>
-  {% for i in participants %}
-      <tr><td>{{i.name}} {{i.lastname}}</td></tr>
-  {% endfor %}
-</table><br>
+    <table>
+        <tr>
+            <th>Członkowie</th>
+        </tr>
+        {% for i in participants %}
+            <tr>
+                <td>{{ i.name }} {{ i.lastname }}</td>
+            </tr>
+        {% endfor %}
+    </table><br>
 
 
-    <a href="/">Wróć</a>
+    <a href="/groups">
+        <button type="button">Wróć
+    </a>
 {% endblock %}

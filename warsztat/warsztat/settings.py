@@ -55,7 +55,7 @@ ROOT_URLCONF = 'warsztat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'uploads/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -122,6 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# STATIC_URL = '/static/'
+# MEDIA_ROOT = '/home/agatagmaj/Pulpit/Kurs_Python/warsztaty4/warsztat/mail_box/'
+# MEDIA_URL = '/photos/'
+
 STATIC_URL = '/static/'
-MEDIA_ROOT = '/home/agatagmaj/Pulpit/Kurs_Python/warsztaty4/warsztat/mail_box/'
-MEDIA_URL = '/photos/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

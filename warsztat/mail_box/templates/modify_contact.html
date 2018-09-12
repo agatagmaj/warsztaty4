@@ -1,79 +1,83 @@
 {% extends "base.html" %}
 
 {% block header %}
- <h1>Edytuj kontakt</h1>
+    <h1>Edytuj kontakt</h1>
 {% endblock %}
 
 
 {% block content %}
-<form action="", method="POST">
-    {% csrf_token %}
-    <label> Zmień imię:
-        <input type="text" name="name" value = {{ contact.name }}>
-    </label><br>
-    <label> Zmień nazwisko:
-        <input type="text" name="lastname" value = {{ contact.lastname }}>
-    </label><br>
-    <label> Zmień opis:
-        <input type="text" name="desc" value = {{ contact.description }}>
-    </label><br>
-    <label> Zmień adres: </label><br>
-    <label> miasto:
-        <input type="text" name="adres_city" value = {{ contact.address.city }}></label>
-    <label> ulica:
-        <input type="text" name="adres_street" value = {{ contact.address.street }}></label><br>
-    <label> nr domu:
-        <input type="text" name="adres_house_no" value = {{ contact.address.house_no }}></label>
-    <label> nr mieszkania:
-        <input type="text" name="adres_flat_no" value = {{ contact.address.flat_no }}></label>
-    <label>
-        <input type="submit" value="Edytuj">
-    </label>
-</form><br>
+    <form action="" , method="POST">
+        {% csrf_token %}
+        <label> Zmień imię:
+            <input type="text" name="name" value= {{ name }}>
+        </label><br>
+        <label> Zmień nazwisko:
+            <input type="text" name="lastname" value= {{ lastname }}>
+        </label><br>
+        <label> Zmień opis:
+            <input type="text" name="desc" value="{{ description }}">
+        </label><br>
+        <label>
+            <input type="submit" value="Edytuj">
+        </label>
+    </form><br>
 
-<form action="/{{ contact.id}}/addAddress", method="POST">
-    {% csrf_token %}
-    <label><strong>Dodaj nowy adres</strong></label><br>
-        <input type="text" name="city" placeholder = 'miasto'><br>
-        <input type="text" name="street" placeholder = 'ulica'><br>
-        <input type="text" name="house_no" placeholder = "numer domu"><br>
-        <input type="text" name="flat_no" placeholder = 'numer mieszkania'>
-    </label><br>
-    <label>
-        <input type="submit" value="Dodaj">
-    </label>
-</form><br>
+    <form action="/addPhoto" , method="POST">
+        {% csrf_token %}
+        <label><strong>Dodaj zdjęcie</strong></label><br>
+        <label>
+            <input type="submit" value="Dodaj">
+        </label>
+    </form><br>
 
-<form action="/{{ contact.id}}/addPhone", method="POST">
-    {% csrf_token %}
-    <label><strong>Dodaj nowy telefon</strong></label><br>
-        <input type="text" name="no" placeholder = 'numer telefonu'><br>
+    <form action="/{{ id }}/addAddress" , method="POST">
+        {% csrf_token %}
+        <label><strong>Dodaj nowy adres</strong></label><br>
+        <input type="text" name="city" placeholder='miasto'><br>
+        <input type="text" name="street" placeholder='ulica'><br>
+        <input type="text" name="house_no" placeholder="numer domu"><br>
+        <input type="text" name="flat_no" placeholder='numer mieszkania'>
+        </label><br>
+        <label>
+            <input type="submit" value="Dodaj">
+        </label>
+    </form><br>
+
+    <form action="/{{ id }}/addPhone" , method="POST">
+        {% csrf_token %}
+        <label><strong>Dodaj nowy telefon</strong></label><br>
+        <input type="text" name="no" placeholder='numer telefonu'><br>
         <select name="no_type">
             <option value="0">nie zdefiniowany</option>
             <option value="1">prywatny</option>
             <option value="2">służbowy</option>
             <option value="3">inny</option>
         </select>
-    </label><br>
-    <label>
-        <input type="submit" value="Dodaj">
-    </label>
-</form><br>
+        </label><br>
+        <label>
+            <input type="submit" value="Dodaj">
+        </label>
+    </form><br>
 
-<form action="/{{ contact.id}}/addEmail", method="POST">
-    {% csrf_token %}
-    <label><strong>Dodaj nowy e-mail</strong></label><br>
-        <input type="text" name="email" placeholder = 'email'><br>
+    <form action="/{{ id }}/addEmail" , method="POST">
+        {% csrf_token %}
+        <label><strong>Dodaj nowy e-mail</strong></label><br>
+        <input type="text" name="email" placeholder='email'><br>
         <select name="email_type">
             <option value="0">nie zdefiniowany</option>
             <option value="1">prywatny</option>
             <option value="2">służbowy</option>
             <option value="3">inny</option>
         </select>
-    </label><br>
-    <label>
-        <input type="submit" value="Dodaj">
-    </label>
-</form>
+        </label><br>
+        <label>
+            <input type="submit" value="Dodaj">
+        </label>
+    </form>
+    <br>
+    <a href="/">
+        <button type="button">Wróć
+    </a>
+
 {% endblock %}
 

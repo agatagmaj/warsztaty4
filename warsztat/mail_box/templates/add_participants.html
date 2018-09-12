@@ -2,18 +2,18 @@
 
 
 {% block header %}
- <h2>Dodaj do grup</h2>
- {% endblock %}
+    <h2>Dodaj do grup</h2>
+{% endblock %}
 
 {% block content %}
-<form action="", method="POST">
-    {% csrf_token %}
-    <label> Wybierz grupy, do których chesz dodać</label><br>
-    {% for n in groups %}
-       <input type="checkbox" name="groups" value="{{ n.id }}">{{ n.name }}<br>
-    {% endfor %}
-    <label>
-        <input type="submit" value="Dodaj">
-    </label>
-</form>
+    <form action="" , method="POST">
+        {% csrf_token %}
+        <label> Wybierz grupy, do których chesz dodać</label><br>
+        {% for n in groups %}
+            <input type="checkbox" name="groups" value="{{ n.id }}">{{ n.name }}<br>
+        {% endfor %}
+        <label>
+            <input type="submit" value="Dodaj">
+        </label>
+    </form>
 {% endblock %}
