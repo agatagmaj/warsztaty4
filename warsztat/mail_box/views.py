@@ -1,9 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
+from mail_box.forms import UploadPhotoForm
 from mail_box.models import *
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
 
 
 class NewContact(View):
@@ -203,14 +202,14 @@ class DeleteAddress(View):
         return HttpResponseRedirect(f'/show/{p_id}')
 
 
-class simple_upload(View):
-    def post(self, request):
-        if request.FILES['myfile']:
-            myfile = request.FILES['myfile']
-            fs = FileSystemStorage()
-            filename = fs.save(myfile.name, myfile)
-            uploaded_file_url = fs.url(filename)
-            return render(request, 'core/simple_upload.html', {
-                'uploaded_file_url': uploaded_file_url
-            })
-        return render(request, 'core/simple_upload.html')
+class UploadPhoto(View):
+    def post(self, request, id):
+        form = UploadPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            contact = Person.objects.get(pk=id)
+            p_id = contact.id
+            contact.photo = request.FILES['photo']
+            contact.save()
+            return HttpResponseRedirect(f'/show/{p_id}')
+        return HttpResponse("Nie udało się")
+

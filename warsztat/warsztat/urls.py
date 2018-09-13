@@ -36,9 +36,6 @@ urlpatterns = [
     re_path(r'^deletePhone/(?P<id>(\d)+)$', DeletePhone.as_view()),
     re_path(r'^deleteEmail/(?P<id>(\d)+)$', DeleteEmail.as_view()),
     re_path(r'^deleteAddress/(?P<id>(\d)+)$', DeleteAddress.as_view()),
-    # path('addPhoto', simple_upload.as_view()),
+    re_path(r'^addPhoto/(?P<id>(\d)+)$', UploadPhoto.as_view()),
 
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

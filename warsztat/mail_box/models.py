@@ -11,7 +11,7 @@ class Person(models.Model):
     name = models.CharField(max_length=64)
     lastname = models.CharField(max_length=64)
     description = models.TextField(null=True)
-    photo = models.ImageField(upload_to='mail_box/photos', blank=True)
+    photo = models.ImageField(upload_to='mail_box/photos', blank=True, null=True)
     address = models.ForeignKey("Address", on_delete=models.SET_NULL, null=True)
 
 

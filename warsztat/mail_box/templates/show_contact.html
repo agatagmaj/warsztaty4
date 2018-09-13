@@ -2,67 +2,93 @@
 
 
 {% block header %}
- <h2>{{ contact.name }} {{ contact.lastname }}</h2>
- {% endblock %}
+    <h2> {{ contact.name }} {{ contact.lastname }}</h2>
+{% endblock %}
 
 
 {% block content %}
-<table>
- <tr><th>Imię</th><th>Nazwisko</th><th>Opis</th></tr>
- <tr>
-  <td>{{contact.name}}</td>
-  <td>{{contact.lastname}}</td>
-  <td>{{contact.description}}</td>
- </tr>
-</table><br>
+    {% if contact.photo %}
+{#        dodać usuwanie zdjęcia! #}
+    <img src="{{ contact.photo.url }}" alt="profile_photo" height="96" width="96">
+    <div><br></div>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Opis</th>
+        </tr>
+        <tr>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.lastname }}</td>
+            <td>{{ contact.description }}</td>
+        </tr>
+    </table><br>
+
 
     {% if contact.address %}
-<table>
-<tr><th>Adres</th></tr>
-<td>{{contact.address.city}}<br>
-  {{contact.address.street}} {{contact.address.house_no}} m. {{contact.address.flat_no }}</td>
-    <td><a href= "/deleteAddress/{{contact.id}}">usuń adres</a></td>
-</table><br>
+        <table>
+            <tr>
+                <th>Adres</th>
+            </tr>
+            <td>{{ contact.address.city }}<br>
+                {{ contact.address.street }} {{ contact.address.house_no }} m. {{ contact.address.flat_no }}</td>
+            <td><a href="/deleteAddress/{{ contact.id }}">usuń adres</a></td>
+        </table><br>
     {% endif %}
 
-        {% if contacts %}
-<table>
-<tr><th>Numer</th><th>Rodzaj</th></tr>
-  {% for i in contacts %}
-      <tr><td>{{i.no}}</td>
-          <td>{{i.get_no_type_display}}</td>
-          <td><a href= "/deletePhone/{{i.id}}">usuń numer</a></td></tr>
-  {% endfor %}
-</table><br>
+    {% if contacts %}
+        <table>
+            <tr>
+                <th>Numer</th>
+                <th>Rodzaj</th>
+            </tr>
+            {% for i in contacts %}
+                <tr>
+                    <td>{{ i.no }}</td>
+                    <td>{{ i.get_no_type_display }}</td>
+                    <td><a href="/deletePhone/{{ i.id }}">usuń numer</a></td>
+                </tr>
+            {% endfor %}
+        </table><br>
     {% endif %}
 
     {% if emails %}
-    <table>
-<tr><th>Email</th><th>Rodzaj</th></tr>
-  {% for i in emails %}
-      <tr><td>{{i.email}}</td>
-          <td>{{i.get_email_type_display}}</td>
-          <td><a href= "/deleteEmail/{{i.id}}">usuń email</a></td></tr>
-  {% endfor %}
-</table>
+        <table>
+            <tr>
+                <th>Email</th>
+                <th>Rodzaj</th>
+            </tr>
+            {% for i in emails %}
+                <tr>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.get_email_type_display }}</td>
+                    <td><a href="/deleteEmail/{{ i.id }}">usuń email</a></td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 
 
-<style>
-th {
-    text-align: center;}
-</style>
-<style>
-td {
-    text-align: center;}
-</style>
+    <style>
+        th {
+            text-align: center;
+        }
+    </style>
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
     <br>
-<form action="/addParticipants/{{ contact.id }}">
-    <label>
-        <input type="submit" value="Dodaj do grup">
-    </label>
-</form>
-<a href= "/modify/{{contact.id}}"><button type="button">Edytuj</a>
+    <form action="/addParticipants/{{ contact.id }}">
+        <label>
+            <input type="submit" value="Dodaj do grup">
+        </label>
+    </form>
+    <a href="/modify/{{ contact.id }}">
+        <button type="button">Edytuj
+    </a>
     <a href="/">
         <button type="button">Wróć
     </a>

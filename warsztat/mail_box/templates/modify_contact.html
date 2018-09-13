@@ -22,12 +22,12 @@
         </label>
     </form><br>
 
-    <form action="/addPhoto" , method="POST">
+    <form action="/addPhoto/{{ id }}" , method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <label><strong>Dodaj zdjęcie</strong></label><br>
-        <label>
-            <input type="submit" value="Dodaj">
-        </label>
+        <label><strong>Dodaj zdjęcie</strong><br>
+            <input type="file" name="photo"></label><br>
+        <button type="submit">Dodaj</button>
+    </form>
     </form><br>
 
     <form action="/{{ id }}/addAddress" , method="POST">
