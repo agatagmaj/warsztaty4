@@ -29,6 +29,7 @@ urlpatterns = [
     re_path(r'^(?P<id>(\d)+)/addPhone$', AddPhone.as_view()),
     re_path(r'^(?P<id>(\d)+)/addEmail$', AddEmail.as_view()),
     path('addGroup', AddGroup.as_view()),
+    re_path(r'^searchGroup?(?P<search>(\D)+)$', SearchGroup.as_view()),
     path('groups', GroupList.as_view()),
     re_path(r'^group/(?P<id>(\d)+)$', ShowGroup.as_view()),
     path('', ShowAll.as_view()),

@@ -1,7 +1,10 @@
 <!doctype html>
-<html>
+<html lang="pl">
 <head>
     <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    <title>Kontakty</title>
     <style>
         body {
         }
@@ -12,16 +15,45 @@
         {% endblock %}
     </title>
 </head>
+
 <body>
-{% block header %}
-{% endblock %}
+<div id="header">
+    <div id="contacts"><a href="/" id="title">Kontakty</a></div>
+    <div id="search">
+        <form action="/searchGroup" method="GET">
+            <input type="text" class="search" name="search" placeholder="podaj imię lub nazwisko">
+        </form>
+    </div>
+</div>
 
-<div>{{ msg }}</div>
+<div id="nav">
+    <form action="/new">
+        <input type="submit" name="new" value="Dodaj kontakt">
+    </form>
+    <form action="/addGroup">
+        <input type="submit" value="Dodaj grupę">
+    </form>
+</div>
 
-{% block content %}
-{% endblock %}
+<div id="header2">
+    {% block header %}
+    {% endblock %}
+</div>
 
-{% block footer %}
-{% endblock %}
+<div id="main">
+    <div id="list">
+        {% block groups %}
+        {% endblock %}
+    </div>
+    <div id="content">
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+<div id="footer">
+
+</div>
 </body>
 </html>

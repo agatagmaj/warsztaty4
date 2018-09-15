@@ -1,0 +1,152 @@
+/*div {*/
+/*border: 1px solid red;*/
+/*}*/
+
+body, html {
+    height: 100vw;
+    width: 100vw;
+    margin: 0px;
+}
+
+body {
+    background-color: white;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+table {
+    text-align: justify;
+    border-spacing: 0;
+}
+
+th {
+    color: cornflowerblue;
+    padding-bottom: 10px;
+    font-size: 20px;
+
+}
+
+tr, td {
+    text-align: justify;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+tr.head_group {
+    text-transform: capitalize;
+    height: 20px;
+    text-align: left;
+}
+
+table.head_group {
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+table.groups {
+    margin-left: 15px;
+}
+
+
+.table_form{
+    margin-left: 15px;
+    margin-top: 15px;
+    /*height: 20px;*/
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#description {
+    padding-left: 100px;
+}
+
+.name_link:hover {
+    background-color: #f5f5f5;
+}
+
+#nav {
+    background-color: cornflowerblue;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+img {
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: cornflowerblue;
+    margin-left: 15px;
+}
+
+#header2 {
+    align-items: center;
+    position: relative;
+}
+
+#header {
+    background-color: cornflowerblue;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 10vw;
+}
+
+#contacts {
+    text-align: center;
+    width: 30vw;
+    margin: 5px;
+}
+
+#title {
+    color: white;
+    font-size: 6vw;
+    text-decoration: none;
+}
+
+#search {
+    color: white;
+    width: 70vw;
+}
+
+input.search {
+    color: white;
+    font-size: 2vw;
+    text-align: center;
+    height: 4vw;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+}
+
+input.search::placeholder {
+    color: whitesmoke;
+    font-size: 2vw;
+    text-align: center;
+}
+
+#main {
+    display: inline-flex;
+    height: 60vw;
+    width: 100vw;
+}
+
+#list {
+    width: 15vw;
+}
+
+#content {
+    width: 85vw;
+}
+
+span {
+    font-size: 18px;
+    color:#bfbfbf;
+    font-style: italic;
+}

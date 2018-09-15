@@ -7,6 +7,7 @@ TYPE_CHOICES = (
     (3, 'inny'),
 )
 
+
 class Person(models.Model):
     name = models.CharField(max_length=64)
     lastname = models.CharField(max_length=64)
@@ -21,15 +22,18 @@ class Address(models.Model):
     house_no = models.CharField(max_length=32, null=True)
     flat_no = models.CharField(max_length=32, null=True)
 
+
 class Phone(models.Model):
     no = models.CharField(max_length=32)
     no_type = models.IntegerField(choices=TYPE_CHOICES, default=0)
     owner = models.ForeignKey('Person', on_delete=models.CASCADE)
 
+
 class Email(models.Model):
     email = models.CharField(max_length=32)
     email_type = models.IntegerField(choices=TYPE_CHOICES, default=0)
     owner = models.ForeignKey('Person', on_delete=models.CASCADE)
+
 
 class Groups(models.Model):
     name = models.CharField(max_length=32)

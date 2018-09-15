@@ -13,8 +13,6 @@ class NewContact(View):
         name = request.POST.get('name')
         lastname = request.POST.get('lastname')
         description = request.POST.get('desc')
-        # photo = request.FILES['file']
-        # <form> attribute -> enctype = "multipart/form-data"
         new_contact = Person.objects.create(name=name, lastname=lastname, description=description)
         return HttpResponseRedirect(f'show/{new_contact.id}')
 
@@ -24,6 +22,8 @@ class ShowContact(View):
         contact = Person.objects.get(pk=id)
         contacts = contact.phone_set.all()
         emails = contact.email_set.all()
+        groups = Groups.objects.filter(person=id)
+        return render(request, "show_contact.html", locals())
         # cnx = {
         #     "name": contact.name,
         #     "lastname": contact.lastname,
@@ -36,7 +36,6 @@ class ShowContact(View):
         #     "contacts": contact.phone_set.all(),
         #     "emails": contact.email_set.all()
         # }
-        return render(request, "show_contact.html", locals())
 
 
 class ModifyContact(View):
@@ -72,7 +71,35 @@ class DeleteContact(View):
 class ShowAll(View):
     def get(self, request):
         contacts = Person.objects.all().order_by('lastname')
+        groups = Groups.objects.all().order_by('name')
         return render(request, "show_all.html", locals())
+
+
+class GroupList(View):
+    def get(self, request):
+        groups = Groups.objects.all().order_by('name')
+        return render(request, "show_groups.html", locals())
+
+
+class SearchGroup(View):
+    def get(self, request, search):
+        grp = Groups.objects.all()
+        search = request.GET.get('search').split(" ")
+        search = [x.lower() for x in search]
+        groups = []
+        for g in grp:
+            for a in g.person.all():
+                if len(search) > 1:
+                    if (search[0] == a.name.lower() and search[1] == a.lastname.lower()) \
+                            or (search[1] == a.name.lower() and search[0] == a.lastname.lower()):
+                        groups.append(g)
+                elif len(search) == 1:
+                    if search[0] == a.name.lower() or search[0] == a.lastname.lower():
+                        groups.append(g)
+        if len(groups) > 0:
+            return render(request, "show_groups.html", locals())
+        else:
+            return HttpResponse("Wskazana osoba nie została dodana do żadnej grupy")
 
 
 class AddAddress(View):
@@ -125,37 +152,13 @@ class AddGroup(View):
         return HttpResponseRedirect('/groups')
 
 
-class GroupList(View):
-    def get(self, request):
-        groups = Groups.objects.all().order_by('name')
-        return render(request, "show_groups.html", locals())
-
-    def post(self, request):
-        grp = Groups.objects.all()
-        search = request.POST.get('search').split(' ')
-        search = [x.lower() for x in search]
-        groups = []
-        for g in grp:
-            for a in g.person.all():
-                if len(search) > 1:
-                    if (search[0] == a.name.lower() and search[1] == a.lastname.lower()) \
-                            or (search[1] == a.name.lower() and search[0] == a.lastname.lower()):
-                        groups.append(g)
-                elif len(search) == 1:
-                    if search[0] == (a.name.lower() or a.lastname.lower()):
-                        groups.append(g)
-        if len(groups) > 0:
-            return render(request, "show_groups.html", locals())
-        else:
-            return HttpResponse("Wskazana osoba nie została dodana do żadnej grupy")
-
-
 class ShowGroup(View):
     def get(self, request, id):
         group = Groups.objects.get(pk=id)
         cnx = {
-            "name": group.name,
-            "participants": group.person.all()
+            "name": (group.name).capitalize(),
+            "participants": group.person.all(),
+            "groups": Groups.objects.all()
         }
         return render(request, "show_group.html", cnx)
 
@@ -212,4 +215,3 @@ class UploadPhoto(View):
             contact.save()
             return HttpResponseRedirect(f'/show/{p_id}')
         return HttpResponse("Nie udało się")
-

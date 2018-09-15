@@ -7,17 +7,6 @@
 
 
 {% block content %}
-    <form action="" , method="POST">
-        <label><strong>Wyszukaj:</strong>
-            <input type="text" name="search" placeholder="podaj imię lub nazwisko">
-        </label><br>
-        <label>
-            <input type="submit" value="Szukaj">
-        </label>
-        {% csrf_token %}
-    </form><br>
-
-
     <table>
         <tr>
             <th>Nazwa grupy</th>
@@ -37,7 +26,4 @@
             }
         </style>
     </table><br>
-    <a href="/">
-        <button type="button">Wróć
-    </a>
 {% endblock %}

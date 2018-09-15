@@ -1,31 +1,35 @@
 {% extends "base.html" %}
 
 
-{% block header %}
-    <h2> {{ contact.name }} {{ contact.lastname }}</h2>
+{% block groups %}
+    <table class="groups">
+        <tr>
+            <th>Moje grupy</th>
+        </tr>
+        {% for i in groups %}
+            <tr class="head_group">
+                <td><a href="/group/{{ i.id }}">{{ i.name }}</a></td>
+            </tr>
+        {% endfor %}
+    </table><br>
 {% endblock %}
 
 
-{% block content %}
-    {% if contact.photo %}
-{#        dodać usuwanie zdjęcia! #}
-    <img src="{{ contact.photo.url }}" alt="profile_photo" height="96" width="96">
-    <div><br></div>
+
+
+{% block header %}
+    <h2> {% if contact.photo %}
+        {#                dodać usuwanie zdjęcia!#}
+        <img src="{{ contact.photo.url }}" alt="profile_photo" height="52" width="52">
+    {% else %}
+        {% load static %}
+        <img src="{% static "user.png" %}" alt="no_image" height="52" width="52">
     {% endif %}
-    <table>
-        <tr>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Opis</th>
-        </tr>
-        <tr>
-            <td>{{ contact.name }}</td>
-            <td>{{ contact.lastname }}</td>
-            <td>{{ contact.description }}</td>
-        </tr>
-    </table><br>
+        {{ contact.name }} {{ contact.lastname }}<span> {{ contact.description }} </span>
+    </h2>
+{% endblock %}
 
-
+{% block content %}
     {% if contact.address %}
         <table>
             <tr>
@@ -68,18 +72,6 @@
             {% endfor %}
         </table>
     {% endif %}
-
-
-    <style>
-        th {
-            text-align: center;
-        }
-    </style>
-    <style>
-        td {
-            text-align: center;
-        }
-    </style>
     <br>
     <form action="/addParticipants/{{ contact.id }}">
         <label>
@@ -88,8 +80,5 @@
     </form>
     <a href="/modify/{{ contact.id }}">
         <button type="button">Edytuj
-    </a>
-    <a href="/">
-        <button type="button">Wróć
     </a>
 {% endblock %}
